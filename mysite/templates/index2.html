@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Templates</title>
+</head>
+<body>
+{{name}} is from {{salary}}
+<!--here it is go to the urls.py and check for analyse keyword if it have then it got the particular file and run particular method-->
+
+<form action='/analyse' method='get'>
+    <textarea name='text' style='margin: 0px; width: 721px; height: 93px;'></textarea>
+    <input type="checkbox" name="removepunc">accept to remove puctuation<br/>
+    <input type="checkbox" name="fullcaps"> UPPERCASE<br>
+    <input type="checkbox" name="newlineremover"> New Line Remover<br>
+    <input type="checkbox" name="extraspaceremover"> Extra Spaces Remover<br>
+    <button type='submit'> Analyze Text</button>
+</form>
+</body>
+</html>
