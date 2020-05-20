@@ -1,6 +1,48 @@
 {% extends 'shop/basic.html' %}
 {% block title%} My Awesome Cart Tracker{% endblock %}
 {% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/shop">My Awesome Cart</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/shop">Home </a>
+      </li>
+         <li class="nav-item">
+        <a class="nav-link" href="/shop/checkout">Checkout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/about">About Us</a>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="/shop/tracker">Tracker<span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/contact">Contact Us</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/blog">Blog</a>
+      </li>
+    </ul>
+     <form method='get' action='/shop/search/' class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+
+
+  Cart(<span id="cart">0</span>)
+</button>
+  </div>
+</nav>
 <div class="container">
     <div class="col my-4">
         <h2>Enter your Order Id and Email address to track your order</h2>
@@ -52,10 +94,12 @@ $('#trackerForm').submit(function(event) {
             encode: true
         })
         .done(function(data) {
+            $('#citems').empty();
             console.log(data);
             data=JSON.parse(data);
-            updates = data[0];
-            if (updates.length > 0 & updates != {}) {
+
+            if (data['status'] == 'success') {
+                updates = data['updates'];
                 for (i = 0; i < updates.length; i++) {
                     let text = updates[i]['text'];
                     let time = updates[i]['time'];
@@ -65,12 +109,8 @@ $('#trackerForm').submit(function(event) {
                 </li>`
                     $('#items').append(mystr);
                 }
-            } else {
-            	mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
-            	$('#items').append(mystr);
-            }
-            cart=JSON.parse(data[1]);
+                  // Fill in the order details
+            cart=JSON.parse(data['itemsJson']);
             let totalPrice=0;
             for (item in cart) {
                 let name = cart[item][1];
@@ -86,8 +126,14 @@ $('#trackerForm').submit(function(event) {
                 </li>`
                 $('#citems').append(mystr);
                 }
-                str=`<li class="list-group-item d-flex justify-content-between align-items-center bg-dark"><div style="width:100%;align:center"><center><span class="badge badge-primary badge-pill"><font size="5">total:$${totalPrice}</font></span></center></div></li>`
+                str=`<li class="list-group-item d-flex justify-content-between align-items-center bg-dark"><div style="width:100%;align:center"><center><span class="badge badge-primary badge-pill"><font size="5">total:₹${totalPrice}</font></span></center></div></li>`
                 $('#citems').append(str);
+            } else {
+            	mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+            	$('#items').append(mystr);
+            }
+
         });
 
 });

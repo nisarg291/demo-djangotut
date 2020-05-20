@@ -9,10 +9,10 @@
 #     # it is templateView is use when we need to direct go to the html page without any logic or calculation
 # ]
 
-from django.urls import path
+from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="blogHome"),
-    path("blogPost/<int:id>", views.blogPost, name="blogPost")
+    path("", views.index, name="blog-home"),
+    path("blogPost/<int:id>", views.blogPost, name="blog-Post"),
 ]

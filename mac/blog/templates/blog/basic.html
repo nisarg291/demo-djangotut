@@ -3,16 +3,11 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>{% block title%} {% endblock %}</title>
-     <style>
-       {% block css %} {% endblock %}
-  </style>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
 
   </head>
   <body>
@@ -25,8 +20,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/about">Checkout</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/shop/about">About Us</a>
@@ -40,20 +38,18 @@
         <a class="nav-link" href="/shop/contact">Contact Us</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/blog">Blog</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="/blog">Blog<span class="sr-only">(current)</span></a>
       </li>
     </ul>
+    <div class="navbar-nav">
+              <a class="nav-item nav-link" href="/register">Login</a>
+              <a class="nav-item nav-link" href="/register">Register</a>
+    </div>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus.">
-
-
-  Cart(<span id="cart">0</span>)
-</button>
   </div>
 </nav>
   {% block body %} {% endblock %}

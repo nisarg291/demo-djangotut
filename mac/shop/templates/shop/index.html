@@ -25,8 +25,11 @@
             height:2em;
             font-size:15px;
             }
+            a:hover{
+                color:lightGrey;
+            }
             .len2{
-            height:1.2em;
+            height:1.7em;
             }
           .carousel-indicators .active {
           background-color: blue;
@@ -63,6 +66,48 @@
 
 {% block body %}
 {% load static %}
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/shop">My Awesome Cart</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+      </li>
+         <li class="nav-item">
+        <a class="nav-link" href="/shop/checkout">Checkout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/about">About Us</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/tracker">Tracker</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/contact">Contact Us</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/blog">Blog</a>
+      </li>
+    </ul>
+     <form method='get' action='/shop/search/' class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+
+
+  Cart(<span id="cart">0</span>)
+</button>
+  </div>
+</nav>
 <div class="container">
 
     <!--Slideshow starts here -->
@@ -81,20 +126,19 @@
 
     <div class="container carousel-inner no-padding">
 
-      <div class="carousel-item active">
-
+      <div class=" c1 carousel-item active">
         {% for i in product %}
-        <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
           <div class="card" style="width:16rem;height:25rem;"><center>
-              <a href="products/{{i.id}}"><img src='/media/{{i.image}}' id="imgpr{{i.id}}" class="card-img-top" alt="..."></a>
+              <a href="products/{{i.id}}" class="l1"><img src='/media/{{i.image}}' id="imgpr{{i.id}}" class="card-img-top" alt="..."></a>
             <div class="card-body">
-               <h5 class="card-title len2" id="namepr{{i.id}}">{{i.product_name}}</h5>
-                <a href="products/{{i.id}}" class="nounderline len1 mb-2"> <p class="card-text ">{{i.desc|slice:"0:45"}}...</p></a>
+                <a href="products/{{i.id}}" class="nounderline l1"><h5 class="card-title len2" id="namepr{{i.id}}">{{i.product_name}}</h5></a>
+                <a href="products/{{i.id}}" class="nounderline len1 l1 mb-2"> <p class="card-text ">{{i.desc|slice:"0:45"}}...</p></a>
                 <p class="card-text price" id="pricepr{{i.id}}">Price:₹{{i.price}}</p>
-                <span id="divpr{{i.id}}" class="divpr">
+                <span id="divpr{{i.id}}" class="b1 divpr">
                 <button id="pr{{i.id}}" class="btn btn-primary cart mt-3">Add To Cart</button>
                  </span>
-              <a href="products/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary cart mt-3">QuickView</button></a>
+              <a href="products/{{i.id}}" class="b1"><button id="qv{{i.id}}" class="btn btn-primary cart mt-3">QuickView</button></a>
             </div></center>
           </div>
         </div>
@@ -118,6 +162,7 @@
 {% endblock %}
 {% block js %}
 <script>
+
 console.log('working');
 // Find out the cart items from localStorage
 if(localStorage.getItem('cart') == null){
@@ -209,7 +254,9 @@ function updateCart(cart)
     }localStorage.setItem('cart', JSON.stringify(cart));
     var sum=0;
     for (var i in cart){
-        sum=sum+cart[i][0];
+        if(cart[i]!=undefined){
+            sum=sum+cart[i][0];
+        }
     }
     document.getElementById('cart').innerHTML = sum;
     //document.getElementById('cart').innerHTML = Object.keys(cart).length;
@@ -242,6 +289,7 @@ $('.divpr').on("click", "button.minus", function() {
      }else{
     document.getElementById('valpr'+a).innerHTML = parseInt(cart['pr' + a][0]);
     updateCart(cart);
+    updatePopover(cart);
     }
 
     //it will call to change in localStorage
@@ -251,6 +299,7 @@ $('.divpr').on("click", "button.plus", function() {
     cart['pr' + a][0] = cart['pr' + a][0] + 1;
     document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
     updateCart(cart);
+    updatePopover(cart);
     //it will call to change in localStorage
 });
 </script>

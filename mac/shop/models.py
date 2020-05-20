@@ -44,6 +44,7 @@ class OrderUpdate(models.Model):
     order_id = models.IntegerField(default="")
     update_desc = models.CharField(max_length=5000)
     timestamp = models.DateField(auto_now_add=True)
+    #using this we do not need to add timestmp it automatic take current time
 
     # it is use to what is display in admin pannel (database) so in each entry it display the description of each order
     def __str__(self):

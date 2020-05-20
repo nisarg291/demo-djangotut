@@ -22,14 +22,7 @@ def index(request):
 def blogPost(request, id):
     post = BlogPost.objects.filter(post_id = id)[0]
     max1=BlogPost.objects.all();
+    first1=BlogPost.objects.first();
+    last1=BlogPost.objects.last();
 
-
-    if id <= 3:
-        return render(request, 'blog/blogPost.html',
-                      {'post': post,'next': int(id + 1),'max1':max1})
-    elif id==9:
-        return render(request, 'blog/blogPost.html',
-                      {'post': post,'prev': int(id - 1),'max1':max1})
-    else:
-        return render(request, 'blog/blogPost.html',
-                  {'post':post,'prev':int(id-1),'next':int(id+1),'max1':max1})
+    return render(request, 'blog/blogPost.html',{'post':post,'prev':int(id-1),'next':int(id+1),'first':first1,'last':last1})

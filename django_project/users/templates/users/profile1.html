@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{%block design%}
+<style>
+#link{ text-decoration:none;
+    background-color:green;
+
+    }
+</style>
+{% endblock %}
+{% block content %}
+    <div class="content-section col-md-12 col-sm-12 col-lg-12">
+      <div class="media">
+        <img class="square-circle account-img" src="{{ image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">UserName:{{username }}</h2>
+            <a href="../../friend/{{id}}/"><button class="btn btn-success" onclick="fun1">friends</button></a>
+          <p class="text-secondary">Email:<div class="alert alert-dark" role="alert">
+                {{email}}</div></p>
+            <p class="text-secondary">Mobile No:<br><div class="alert alert-dark" role="alert">
+                {{mobile_no}}</div></p>
+            <p class="text-secondary">Clg Name:<br><div class="alert alert-dark" role="alert">{{clg_name}}</div></p>
+            <p class="text-secondary">Degree:<br><div class="alert alert-dark" role="alert">{{degree}}</div></p>
+            <p class="text-secondary">Skills:<br><div class="alert alert-dark" role="alert">{{skill}}</div></p>
+            <p class="text-secondary"><br><div class="alert alert-dark" id="friends" role="alert">{{friends}}</div></p>
+<!--            here user is inbuilt object which reflect the current user which is log in we do not need to pass any dictnary which have key value is user. like in home.html we use {{post.title}} here we need to pass dict which have post as key of dict. -->
+        </div>
+      </div>
+      <!-- FORM HERE -->
+<!--       <form method="POST" enctype="multipart/form-data">-->
+<!--          {% csrf_token %}-->
+<!--          <fieldset class="form-group">-->
+<!--              <legend class="border-bottom mb-4">Profile Info</legend>-->
+<!--              {{ u_form.as_p }}-->
+<!--              {{ p_form.as_p }}-->
+<!--          </fieldset>-->
+<!--          <div class="form-group">-->
+<!--              <button class="btn btn-outline-info" type="submit">Update</button>-->
+<!--          </div>-->
+<!--    </form>-->
+    </div>
+{% endblock content %}
+{%block js%}
+var firends=document.getElementById('friends');
+function fun1(){
+    if len(friends.value)!=0{
+
+    }
+
+}
+{% endblock %}

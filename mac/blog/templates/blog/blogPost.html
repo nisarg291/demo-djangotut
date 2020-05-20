@@ -1,6 +1,7 @@
 {% extends 'blog/basic.html' %}
-
+{%block title%}blogPost{%endblock%}
 {% block body %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-8 blog-main" style="float:left">
@@ -9,7 +10,7 @@
             </h1>
 
             <div class="blog-post">
-                <p><img src="/media/{{post.thumbnail}}" style="height:250px;with:400px"/></p>
+                <p><img src="/media/{{post.thumbnail}}" class="col-sm-12" style="height:250px;with:400px"/></p>
                 <p class="blog-post-meta">published date:{{post.pub_date}}</p>
                 <div class="fb-like" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-layout="standard" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div><br>
 
@@ -21,14 +22,14 @@
                 <h2>{{post.head2}}</h2>
                 <p>{{post.chead2}}</p>
 
-            {%if prev != undefined and next != undefined %}
+            {%if post.post_id != first.post_id and post.post_id != last.post_id %}
                 <a href="{{prev}}"><button class="btn btn-primary cart mt-3">previous</button></a>
                 <a href="{{next}}"><button class="btn btn-primary cart mt-3">next</button></a>
             {%endif%}
-            {%if prev == undefined %}
+            {%if post.post_id == first.post_id %}
                  <a href="{{next}}"><button class="btn btn-primary cart mt-3">next</button></a>
             {%endif%}
-            {%if next == undefined %}
+            {%if post.post_id == last.post_id %}
                  <a href="{{prev}}"><button class="btn btn-primary cart mt-3">previous</button></a>
             {%endif%}
 

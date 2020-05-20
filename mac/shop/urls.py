@@ -9,7 +9,8 @@ urlpatterns = [
     path("contact/", views.contact, name="ContactUs"),
     path("tracker/", views.tracker, name="TrackingStatus"),
     path("search/", views.search, name="Search"),
+    #path("mail/<int:id>",views.sendmail,name="mail"),
     path("products/<int:myid>", views.productView, name="ProductView"),
     path("checkout", views.checkout, name="Checkout"),
-    path("handleRequest", views.handleRequest, name="HandleRequest"),
+    #path("handlerequest", views.handlerequest, name="HandleRequest"),
 ]

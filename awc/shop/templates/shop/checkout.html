@@ -60,6 +60,8 @@ if (localStorage.getItem('cart') == null) {
     var cart = {};
 } else {
     cart = JSON.parse(localStorage.getItem('cart'));
+<!--     here cart is dictionary which is store in localStorage-->
+
 }
 console.log(cart);
 var sum = 0;
@@ -90,6 +92,7 @@ if ($.isEmptyObject(cart)) {
 }
 document.getElementById('cart').innerHTML = sum;
 $('#itemsJson').val(JSON.stringify(cart));
+<!--using this we set the value of the input tag which have itemjson id  -->
 {% if thank %}
 alert('Thanks for ordering with us. Your order id is {{id}}. Use it to track your order using our order tracker');
 localStorage.clear();
